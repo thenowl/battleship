@@ -79,4 +79,24 @@ describe('Gameboard', () => {
     gameBoard.receiveAttack(3, 3);
     expect(gameBoard.missedAttacks[3][3]).toBe('miss');
   });
+
+  it('should have a allShipsSunk method', () => {
+    const gameBoard = new Gameboard();
+    expect(gameBoard.allShipsSunk).toBeInstanceOf(Function);
+  });
+
+  it('allShipsSunk method should return false if not all ships are sunk', () => {
+    const gameBoard = new Gameboard();
+    gameBoard.placeShip('destroyer', 3, 3, 'horizontal');
+    expect(gameBoard.allShipsSunk()).toBe(false);
+  });
+
+  it('allShipsSunk method should return true if all ships are sunk', () => {
+    const gameBoard = new Gameboard();
+    gameBoard.placeShip('destroyer', 3, 3, 'horizontal');
+    gameBoard.receiveAttack(3, 3);
+    gameBoard.receiveAttack(3, 4);
+    gameBoard.receiveAttack(3, 5);
+    expect(gameBoard.allShipsSunk()).toBe(true);
+  });
 });

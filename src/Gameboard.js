@@ -108,7 +108,10 @@ export class Gameboard {
       return true;
     }
     this.#missedAttacks[x][y] = 'miss';
-
     return false;
+  }
+
+  allShipsSunk() {
+    return this.#ships.every((ship) => ship.sunk);
   }
 }
