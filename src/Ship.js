@@ -21,7 +21,8 @@ export class Ship {
   }
 
   hit() {
-    this.#hitsTaken += 1;
+    this.#hitsTaken++;
+    this.isSunk();
   }
 
   isSunk() {

@@ -2,10 +2,14 @@ import { Ship } from './Ship';
 
 export class Gameboard {
   #gameBoard;
+  #hits;
+  #missedAttacks;
   #ships;
   #shipClasses;
   constructor() {
     this.#gameBoard = this.#createGameBoard();
+    this.#hits = this.#createGameBoard();
+    this.#missedAttacks = this.#createGameBoard();
     this.#ships = [];
     this.#shipClasses = [
       [5, 'carrier'],
@@ -36,6 +40,10 @@ export class Gameboard {
 
   get gameBoard() {
     return this.#gameBoard;
+  }
+
+  get missedAttacks() {
+    return this.#missedAttacks;
   }
 
   get ships() {
@@ -91,10 +99,16 @@ export class Gameboard {
   }
 
   receiveAttack(x, y) {
-    if (this.#gameBoard[y][x] !== null) {
-      this.#gameBoard[y][x].hit();
+    if (this.#gameBoard[x][y] !== null) {
+      if (this.#hits[x][y] === 'hit') {
+        return false;
+      }
+      this.#gameBoard[x][y].hit();
+      this.#hits[x][y] = 'hit';
       return true;
     }
+    this.#missedAttacks[x][y] = 'miss';
+
     return false;
   }
 }

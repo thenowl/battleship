@@ -38,4 +38,45 @@ describe('Gameboard', () => {
     const gameBoard = new Gameboard();
     expect(gameBoard.receiveAttack).toBeInstanceOf(Function);
   });
+
+  it('receiveAttack method should return true if a ship is hit', () => {
+    const gameBoard = new Gameboard();
+    gameBoard.placeShip('destroyer', 3, 3, 'horizontal');
+    expect(gameBoard.receiveAttack(3, 3)).toBe(true);
+  });
+
+  it('receiveAttack method should return false if a ship is not hit', () => {
+    const gameBoard = new Gameboard();
+    expect(gameBoard.receiveAttack(3, 3)).toBe(false);
+  });
+
+  it('receiveAttack method should hit a ship', () => {
+    const gameBoard = new Gameboard();
+    gameBoard.placeShip('destroyer', 3, 3, 'horizontal');
+    gameBoard.receiveAttack(3, 3);
+    expect(gameBoard.gameBoard[3][3].hitsTaken).toBe(1);
+  });
+
+  it('receiveAttack method should return false if a ship is already hit', () => {
+    const gameBoard = new Gameboard();
+    gameBoard.placeShip('destroyer', 3, 3, 'horizontal');
+    gameBoard.receiveAttack(3, 3);
+    expect(gameBoard.receiveAttack(3, 3)).toBe(false);
+  });
+
+  it('receiveAttack method should sink a ship', () => {
+    const gameBoard = new Gameboard();
+    gameBoard.placeShip('destroyer', 3, 3, 'horizontal');
+    gameBoard.receiveAttack(3, 3);
+    gameBoard.receiveAttack(3, 4);
+    gameBoard.receiveAttack(3, 5);
+    expect(gameBoard.gameBoard[3][3].hitsTaken).toBe(3);
+    expect(gameBoard.gameBoard[3][3].sunk).toBe(true);
+  });
+
+  it('should take record of missed attacks', () => {
+    const gameBoard = new Gameboard();
+    gameBoard.receiveAttack(3, 3);
+    expect(gameBoard.missedAttacks[3][3]).toBe('miss');
+  });
 });
