@@ -57,13 +57,6 @@ describe('Gameboard', () => {
     expect(gameBoard.gameBoard[3][3].hitsTaken).toBe(1);
   });
 
-  it('receiveAttack method should return false if a ship is already hit', () => {
-    const gameBoard = new Gameboard();
-    gameBoard.placeShip('destroyer', 3, 3, 'horizontal');
-    gameBoard.receiveAttack(3, 3);
-    expect(gameBoard.receiveAttack(3, 3)).toBe(false);
-  });
-
   it('receiveAttack method should sink a ship', () => {
     const gameBoard = new Gameboard();
     gameBoard.placeShip('destroyer', 3, 3, 'horizontal');
@@ -72,12 +65,6 @@ describe('Gameboard', () => {
     gameBoard.receiveAttack(5, 3);
     expect(gameBoard.gameBoard[3][3].hitsTaken).toBe(3);
     expect(gameBoard.gameBoard[3][3].sunk).toBe(true);
-  });
-
-  it('should take record of missed attacks', () => {
-    const gameBoard = new Gameboard();
-    gameBoard.receiveAttack(3, 3);
-    expect(gameBoard.missedAttacks[3][3]).toBe('miss');
   });
 
   it('should have a allShipsSunk method', () => {

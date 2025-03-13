@@ -12,11 +12,17 @@ export class Player {
     return this.#gameBoard;
   }
 
-  attack(x, y) {
-    return this.#gameBoard.receiveAttack(x, y);
+  get attackLog() {
+    return this.#gameBoard.attackLog;
   }
 
   placeShips(shiptType, x, y, direction = 'horizontal') {
     return this.#gameBoard.placeShip(shiptType, x, y, direction);
+  }
+
+  attack(player, x, y) {
+    const attack = player.#gameBoard.receiveAttack(x, y);
+    this.#gameBoard.logAttack(x, y, attack);
+    return attack;
   }
 }

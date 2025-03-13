@@ -2,14 +2,12 @@ import { Ship } from './Ship';
 
 export class Gameboard {
   #gameBoard;
-  #hits;
-  #missedAttacks;
+  #attackLog;
   #ships;
   #shipClasses;
   constructor() {
     this.#gameBoard = this.#createGameBoard();
-    this.#hits = this.#createGameBoard();
-    this.#missedAttacks = this.#createGameBoard();
+    this.#attackLog = this.#createGameBoard();
     this.#ships = [];
     this.#shipClasses = [
       [5, 'carrier'],
@@ -42,8 +40,8 @@ export class Gameboard {
     return this.#gameBoard;
   }
 
-  get missedAttacks() {
-    return this.#missedAttacks;
+  get attackLog() {
+    return this.#attackLog;
   }
 
   get ships() {
@@ -99,15 +97,14 @@ export class Gameboard {
 
   receiveAttack(x, y) {
     if (this.#gameBoard[x][y] !== null) {
-      if (this.#hits[x][y] === 'hit') {
-        return false;
-      }
       this.#gameBoard[x][y].hit();
-      this.#hits[x][y] = 'hit';
       return true;
     }
-    this.#missedAttacks[x][y] = 'miss';
     return false;
+  }
+
+  logAttack(x, y, attack) {
+    attack ? (this.#attackLog[x][y] = 'hit') : (this.#attackLog[x][y] = 'miss');
   }
 
   allShipsSunk() {
