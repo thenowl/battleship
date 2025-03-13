@@ -59,7 +59,7 @@ export class Gameboard {
       }
 
       for (let i = 0; i < shipLength; i++) {
-        if (this.#gameBoard[y][x + i] !== null) {
+        if (this.#gameBoard[x + i][y] !== null) {
           return false;
         }
       }
@@ -69,7 +69,7 @@ export class Gameboard {
       }
 
       for (let i = 0; i < shipLength; i++) {
-        if (this.#gameBoard[y + i][x] !== null) {
+        if (this.#gameBoard[x][y + i] !== null) {
           return false;
         }
       }
@@ -87,9 +87,9 @@ export class Gameboard {
       const shipLength = ship.length;
       for (let i = 0; i < shipLength; i++) {
         if (direction === 'horizontal') {
-          this.#gameBoard[y][x + i] = ship;
+          this.#gameBoard[x + i][y] = ship;
         } else {
-          this.#gameBoard[y + i][x] = ship;
+          this.#gameBoard[x][y + i] = ship;
         }
       }
       return true;

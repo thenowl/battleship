@@ -29,9 +29,9 @@ describe('Gameboard', () => {
     expect(gameBoard.ships.length).toBe(1);
     expect(gameBoard.ships[0].length).toBe(3);
     expect(gameBoard.gameBoard[3][3]).toBeInstanceOf(Ship);
-    expect(gameBoard.gameBoard[3][4]).toBeInstanceOf(Ship);
-    expect(gameBoard.gameBoard[3][5]).toBeInstanceOf(Ship);
-    expect(gameBoard.gameBoard[3][6]).toBe(null);
+    expect(gameBoard.gameBoard[4][3]).toBeInstanceOf(Ship);
+    expect(gameBoard.gameBoard[5][3]).toBeInstanceOf(Ship);
+    expect(gameBoard.gameBoard[6][3]).toBe(null);
   });
 
   it('should have a receiveAttack method', () => {
@@ -68,8 +68,8 @@ describe('Gameboard', () => {
     const gameBoard = new Gameboard();
     gameBoard.placeShip('destroyer', 3, 3, 'horizontal');
     gameBoard.receiveAttack(3, 3);
-    gameBoard.receiveAttack(3, 4);
-    gameBoard.receiveAttack(3, 5);
+    gameBoard.receiveAttack(4, 3);
+    gameBoard.receiveAttack(5, 3);
     expect(gameBoard.gameBoard[3][3].hitsTaken).toBe(3);
     expect(gameBoard.gameBoard[3][3].sunk).toBe(true);
   });
@@ -95,8 +95,8 @@ describe('Gameboard', () => {
     const gameBoard = new Gameboard();
     gameBoard.placeShip('destroyer', 3, 3, 'horizontal');
     gameBoard.receiveAttack(3, 3);
-    gameBoard.receiveAttack(3, 4);
-    gameBoard.receiveAttack(3, 5);
+    gameBoard.receiveAttack(4, 3);
+    gameBoard.receiveAttack(5, 3);
     expect(gameBoard.allShipsSunk()).toBe(true);
   });
 });
