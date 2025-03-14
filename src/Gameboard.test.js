@@ -3,7 +3,7 @@ import { Gameboard } from './Gameboard';
 import { Ship } from './Ship';
 
 describe('Gameboard', () => {
-  it('should create a gameboard object', () => {
+  it('should create a Gameboard object', () => {
     const gameBoard = new Gameboard();
     expect(gameBoard).toBeInstanceOf(Gameboard);
   });

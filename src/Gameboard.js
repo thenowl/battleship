@@ -44,6 +44,10 @@ export class Gameboard {
     return this.#attackLog;
   }
 
+  get shipClasses() {
+    return this.#shipClasses;
+  }
+
   get ships() {
     return this.#ships;
   }
@@ -78,9 +82,9 @@ export class Gameboard {
   placeShip(shipClass, x, y, direction) {
     const type = this.#shipClasses.find((ship) => ship[1] === shipClass);
     const ship = new Ship(type[0]);
-    this.#shipClasses.splice(this.#shipClasses.indexOf(type), 1);
 
     if (this.#isShipPlacementValid(ship, x, y, direction)) {
+      this.#shipClasses.splice(this.#shipClasses.indexOf(type), 1);
       this.#ships.push(ship);
       const shipLength = ship.length;
       for (let i = 0; i < shipLength; i++) {
