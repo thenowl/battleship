@@ -53,13 +53,22 @@ describe('Player', () => {
     expect(player.attack).toBeInstanceOf(Function);
   });
 
-  it('attack method should call gameBoard.receiveAttack', () => {
+  it('Real player attack method should call gameBoard.receiveAttack', () => {
     const player1 = new RealPlayer();
     const player2 = new RealPlayer();
 
     const receiveAttack = jest.spyOn(player2.gameBoard, 'receiveAttack');
     player1.attack(player2, 3, 3);
     expect(receiveAttack).toHaveBeenCalledWith(3, 3);
+  });
+
+  it('Computer player attack method should call gameBoard.receiveAttack', () => {
+    const player1 = new ComputerPlayer();
+    const player2 = new RealPlayer();
+
+    const receiveAttack = jest.spyOn(player2.gameBoard, 'receiveAttack');
+    player1.attack(player2);
+    expect(receiveAttack).toHaveBeenCalled();
   });
 
   it('attack method should return the result of gameBoard.receiveAttack', () => {
