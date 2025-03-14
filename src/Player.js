@@ -39,13 +39,11 @@ class RealPlayer extends Player {
 
 class ComputerPlayer extends Player {
   #pendingStrike;
-  #pendingCoords;
   #pendingHorizontal;
   #pendingVertical;
   constructor(name = 'Computer') {
     super(name);
     this.#pendingStrike = false;
-    this.#pendingCoords = [];
     this.#pendingHorizontal = [];
     this.#pendingVertical = [];
   }
