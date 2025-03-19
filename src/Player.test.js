@@ -96,4 +96,28 @@ describe('Player', () => {
     player1.attack(player2, 3, 3);
     expect(player1.attackLog[3][3]).toBe('hit');
   });
+
+  it('ComputerPlayer should sink a ship within "ship-length + 3" turns after first strike', () => {
+    const player1 = new RealPlayer();
+    const player2 = new ComputerPlayer();
+
+    player1.placeShips('destroyer', 3, 3, 'vertical');
+    let receivedAttack = false;
+
+    while (!receivedAttack) {
+      receivedAttack = player2.attack(player1);
+    }
+
+    let strikeCounter = 1;
+
+    while (!player1.gameBoard.gameBoard[3][3].sunk) {
+      player2.attack(player1);
+      strikeCounter++;
+    }
+
+    const shipLength = 3;
+    const shipSunkWithinLimits = strikeCounter <= shipLength + 3;
+
+    expect(shipSunkWithinLimits).toBe(true);
+  });
 });

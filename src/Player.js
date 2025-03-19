@@ -77,9 +77,9 @@ class ComputerPlayer extends Player {
   #isValidCoordinate(coord) {
     return (
       coord[0] >= 0 &&
-      coord[0] < 10 &&
+      coord[0] < this.gameBoard.gameBoard.length &&
       coord[1] >= 0 &&
-      coord[1] < 10 &&
+      coord[1] < this.gameBoard.gameBoard[0].length &&
       this.attackLog[coord[0]][coord[1]] === null
     );
   }
