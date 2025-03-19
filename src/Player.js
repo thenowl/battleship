@@ -55,9 +55,13 @@ class ComputerPlayer extends Player {
     let y = Math.floor(Math.random() * 10);
 
     if (placeHorizontal === 'horizontal') {
-      x + shipLength >= 10 ? (x = x - shipLength) : x;
+      y + shipLength >= this.gameBoard.gameBoard[0].length
+        ? (y = y - shipLength)
+        : y;
     } else if (placeHorizontal === 'vertical') {
-      y + shipLength >= 10 ? (y = y - shipLength) : y;
+      x + shipLength >= this.gameBoard.gameBoard.length
+        ? (x = x - shipLength)
+        : x;
     }
     return [x, y, placeHorizontal];
   }
@@ -121,48 +125,48 @@ class ComputerPlayer extends Player {
             // If horizontal strike success push valid horizontal coords
             if (
               this.#isValidCoordinate([
-                currentCoordinate[0] + 1,
-                currentCoordinate[1],
+                currentCoordinate[0],
+                currentCoordinate[1] + 1,
               ])
             ) {
               this.#pendingHorizontal.push([
-                currentCoordinate[0] + 1,
-                currentCoordinate[1],
+                currentCoordinate[0],
+                currentCoordinate[1] + 1,
               ]);
             }
             if (
               this.#isValidCoordinate([
-                currentCoordinate[0] - 1,
-                currentCoordinate[1],
+                currentCoordinate[0],
+                currentCoordinate[1] - 1,
               ])
             ) {
               this.#pendingHorizontal.push([
-                currentCoordinate[0] - 1,
-                currentCoordinate[1],
+                currentCoordinate[0],
+                currentCoordinate[1] - 1,
               ]);
             }
           } else {
             // If vertical strike success push valid vertical coords
             if (
               this.#isValidCoordinate([
-                currentCoordinate[0],
-                currentCoordinate[1] + 1,
+                currentCoordinate[0] + 1,
+                currentCoordinate[1],
               ])
             ) {
               this.#pendingVertical.push([
-                currentCoordinate[0],
-                currentCoordinate[1] + 1,
+                currentCoordinate[0] + 1,
+                currentCoordinate[1],
               ]);
             }
             if (
               this.#isValidCoordinate([
-                currentCoordinate[0],
-                currentCoordinate[1] - 1,
+                currentCoordinate[0] - 1,
+                currentCoordinate[1],
               ])
             ) {
               this.#pendingVertical.push([
-                currentCoordinate[0],
-                currentCoordinate[1] - 1,
+                currentCoordinate[0] - 1,
+                currentCoordinate[1],
               ]);
             }
           }
@@ -187,17 +191,17 @@ class ComputerPlayer extends Player {
       if (attack) {
         this.#pendingStrike = true;
         //Push valid surrounding coords into respective arrays
-        if (this.#isValidCoordinate([x + 1, y])) {
-          this.#pendingHorizontal.push([x + 1, y]);
-        }
-        if (this.#isValidCoordinate([x - 1, y])) {
-          this.#pendingHorizontal.push([x - 1, y]);
-        }
         if (this.#isValidCoordinate([x, y + 1])) {
-          this.#pendingVertical.push([x, y + 1]);
+          this.#pendingHorizontal.push([x, y + 1]);
         }
         if (this.#isValidCoordinate([x, y - 1])) {
-          this.#pendingVertical.push([x, y - 1]);
+          this.#pendingHorizontal.push([x, y - 1]);
+        }
+        if (this.#isValidCoordinate([x + 1, y])) {
+          this.#pendingVertical.push([x + 1, y]);
+        }
+        if (this.#isValidCoordinate([x - 1, y])) {
+          this.#pendingVertical.push([x - 1, y]);
         }
       }
       return attack;

@@ -56,22 +56,22 @@ export class Gameboard {
     const shipLength = ship.length;
 
     if (direction === 'horizontal') {
-      if (x + shipLength > 10) {
-        return false;
-      }
-
-      for (let i = 0; i < shipLength; i++) {
-        if (this.#gameBoard[x + i][y] !== null) {
-          return false;
-        }
-      }
-    } else {
-      if (y + shipLength > 10) {
+      if (y + shipLength > this.#gameBoard[0].length) {
         return false;
       }
 
       for (let i = 0; i < shipLength; i++) {
         if (this.#gameBoard[x][y + i] !== null) {
+          return false;
+        }
+      }
+    } else {
+      if (x + shipLength > this.#gameBoard.length) {
+        return false;
+      }
+
+      for (let i = 0; i < shipLength; i++) {
+        if (this.#gameBoard[x + i][y] !== null) {
           return false;
         }
       }
@@ -89,9 +89,9 @@ export class Gameboard {
       const shipLength = ship.length;
       for (let i = 0; i < shipLength; i++) {
         if (direction === 'horizontal') {
-          this.#gameBoard[x + i][y] = ship;
-        } else {
           this.#gameBoard[x][y + i] = ship;
+        } else {
+          this.#gameBoard[x + i][y] = ship;
         }
       }
       return true;
