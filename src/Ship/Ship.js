@@ -1,15 +1,21 @@
 export class Ship {
   #length;
+  #type;
   #hitsTaken;
   #sunk;
-  constructor(length) {
+  constructor(length, type) {
     this.#length = length;
+    this.#type = type;
     this.#hitsTaken = 0;
     this.#sunk = false;
   }
 
   get length() {
     return this.#length;
+  }
+
+  get type() {
+    return this.#type;
   }
 
   get hitsTaken() {

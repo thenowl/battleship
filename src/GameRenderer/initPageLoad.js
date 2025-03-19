@@ -1,0 +1,3 @@
+const initPageLoad = () => {};
+
+export { initPageLoad };

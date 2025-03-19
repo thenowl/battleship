@@ -83,7 +83,7 @@ export class Gameboard {
 
   placeShip(shipClass, x, y, direction) {
     const type = this.#shipClasses.find((ship) => ship[1] === shipClass);
-    const ship = new Ship(type[0]);
+    const ship = new Ship(type[0], type[1]);
 
     if (this.#isShipPlacementValid(ship, x, y, direction)) {
       this.#shipClasses.splice(this.#shipClasses.indexOf(type), 1);
