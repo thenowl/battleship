@@ -1,4 +1,4 @@
-import { Ship } from './Ship';
+import { Ship } from '../Ship/Ship';
 
 export class Gameboard {
   #gameBoard;
@@ -54,9 +54,11 @@ export class Gameboard {
 
   #isShipPlacementValid(ship, x, y, direction) {
     const shipLength = ship.length;
+    const horizontalGameboardLength = this.#gameBoard[0].length;
+    const verticalGameboardLength = this.#gameBoard.length;
 
     if (direction === 'horizontal') {
-      if (y + shipLength > this.#gameBoard[0].length) {
+      if (y + shipLength > horizontalGameboardLength) {
         return false;
       }
 
@@ -66,7 +68,7 @@ export class Gameboard {
         }
       }
     } else {
-      if (x + shipLength > this.#gameBoard.length) {
+      if (x + shipLength > verticalGameboardLength) {
         return false;
       }
 

@@ -1,4 +1,4 @@
-import { Gameboard } from './Gameboard';
+import { Gameboard } from '../Gameboard/Gameboard';
 
 class Player {
   gameBoard;
@@ -51,17 +51,15 @@ class ComputerPlayer extends Player {
   #randomCoordinateGenerator(shipLength = 0, direction = false) {
     // Randomly determine whether to place the ship horizontally or vertically
     const placeHorizontal = Math.floor() > 0.5 ? 'horizontal' : 'vertical';
+    const horizontalGameboardLength = this.gameBoard.gameBoard[0].length;
+    const verticalGameboardLength = this.gameBoard.gameBoard.length;
     let x = Math.floor(Math.random() * 10);
     let y = Math.floor(Math.random() * 10);
 
     if (placeHorizontal === 'horizontal') {
-      y + shipLength >= this.gameBoard.gameBoard[0].length
-        ? (y = y - shipLength)
-        : y;
+      y + shipLength >= horizontalGameboardLength ? (y = y - shipLength) : y;
     } else if (placeHorizontal === 'vertical') {
-      x + shipLength >= this.gameBoard.gameBoard.length
-        ? (x = x - shipLength)
-        : x;
+      x + shipLength >= verticalGameboardLength ? (x = x - shipLength) : x;
     }
     return [x, y, placeHorizontal];
   }
@@ -79,11 +77,14 @@ class ComputerPlayer extends Player {
   }
 
   #isValidCoordinate(coord) {
+    const horizontalGameboardLength = this.gameBoard.gameBoard[0].length;
+    const verticalGameboardLength = this.gameBoard.gameBoard.length;
+
     return (
       coord[0] >= 0 &&
-      coord[0] < this.gameBoard.gameBoard.length &&
+      coord[0] < verticalGameboardLength &&
       coord[1] >= 0 &&
-      coord[1] < this.gameBoard.gameBoard[0].length &&
+      coord[1] < horizontalGameboardLength &&
       this.attackLog[coord[0]][coord[1]] === null
     );
   }

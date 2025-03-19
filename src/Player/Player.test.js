@@ -1,5 +1,5 @@
 import { describe, it, expect, jest } from '@jest/globals';
-import { Gameboard } from './Gameboard';
+import { Gameboard } from '../Gameboard/Gameboard';
 import { RealPlayer, ComputerPlayer } from './Player';
 
 describe('Player', () => {

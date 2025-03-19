@@ -1,6 +1,6 @@
 import { describe, it, expect } from '@jest/globals';
 import { Gameboard } from './Gameboard';
-import { Ship } from './Ship';
+import { Ship } from '../Ship/Ship';
 
 describe('Gameboard', () => {
   it('should create a Gameboard object', () => {
