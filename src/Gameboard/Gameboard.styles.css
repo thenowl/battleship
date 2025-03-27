@@ -7,6 +7,12 @@
   grid-template-columns: repeat(10, 1fr);
 }
 
-.gameBoardCell {
+.gameBoardCell,
+.attackLogCell {
   border: 1px solid black;
+}
+
+.attackLogCell:hover {
+  background: blue;
+  cursor: crosshair;
 }

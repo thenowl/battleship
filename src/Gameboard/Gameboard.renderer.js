@@ -2,8 +2,15 @@ import { Gameboard } from './Gameboard';
 import './Gameboard.styles.css';
 
 export class RenderGameboard {
-  constructor() {
-    this.gameBoard = this.#init();
+  #gameBoard;
+  #type;
+  constructor(type) {
+    this.#type = type;
+    this.#gameBoard = this.#init();
+  }
+
+  get gameBoard() {
+    return this.#gameBoard;
   }
 
   #init() {
@@ -15,10 +22,22 @@ export class RenderGameboard {
       row.forEach((cell, cellIndex) => {
         const square = document.createElement('div');
         square.id = `square${cellIndex}${rowIndex}`;
-        square.className = 'gameBoardCell';
+
+        this.#type === 'gameBoard'
+          ? (square.className = 'gameBoardCell')
+          : (square.className = 'attackLogCell');
+
         renderedGameboard.appendChild(square);
       }),
     );
+
+    renderedGameboard.addEventListener('click', (e) => {
+      const target = e.target.id;
+
+      if (!target) return;
+
+      // ADD CODE HERE
+    });
 
     return renderedGameboard;
   }
