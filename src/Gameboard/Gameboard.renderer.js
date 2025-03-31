@@ -1,9 +1,11 @@
 import { Gameboard } from './Gameboard';
+import { Ship } from '../Ship/Ship';
 import './Gameboard.styles.css';
 
 export class RenderGameboard {
-  #gameBoard;
   #type;
+  #gameBoard;
+
   constructor(type) {
     this.#type = type;
     this.#gameBoard = this.#init();
@@ -31,14 +33,45 @@ export class RenderGameboard {
       }),
     );
 
-    renderedGameboard.addEventListener('click', (e) => {
-      const target = e.target.id;
-
-      if (!target) return;
-
-      // ADD CODE HERE
-    });
+    if (this.#type === 'gameBoard') {
+      renderedGameboard.addEventListener('click', (event, ship, direction) => {
+        this.#placeShip(event, ship, direction);
+      });
+    } else {
+      renderedGameboard.addEventListener('click', (event) => {
+        this.#attack(event);
+      });
+    }
 
     return renderedGameboard;
   }
+
+  #placeShip(event, ship, direction = 'horizontal') {
+    const target = event.target.id;
+
+    if (!target) return;
+
+    const x = target.charAt(7);
+    const y = target.charAt(8);
+    const shipClass = ship.type;
+
+    const placeShip = this.#gameBoard.placeShip(shipClass, x, y, direction);
+
+    if (placeShip) {
+      const newShip = new RenderShip(ship);
+
+      console.log(this.#gameBoard);
+    }
+  }
+
+  #attack(event) {
+    const target = event.target.id;
+
+    if (!target) return;
+
+    const x = target.charAt(7);
+    const y = target.charAt(8);
+  }
+
+  renderReceiveAttack() {}
 }
