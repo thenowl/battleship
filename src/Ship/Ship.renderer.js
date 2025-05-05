@@ -8,11 +8,13 @@ export class RenderShip {
   #type;
   #length;
   #ship;
+  #orientation;
 
   constructor(ship) {
     this.#type = ship.type;
     this.#length = ship.length;
     this.#ship = this.#init();
+    this.#orientation = 'horizontal';
   }
 
   get ship() {
