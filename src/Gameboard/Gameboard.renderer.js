@@ -58,9 +58,14 @@ export class RenderGameboard {
     const placeShip = this.#gameBoard.placeShip(shipClass, x, y, direction);
 
     if (placeShip) {
-      const newShip = new RenderShip(ship);
+      const shipCells = this.#gameBoard.gameBoard[y][x];
 
-      console.log(this.#gameBoard);
+      shipCells.forEach((cell) => {
+        const square = document.querySelector(`#square${cell[0]}${cell[1]}`);
+        square.classList.add(shipClass);
+      });
+    } else {
+      console.log('Invalid placement');
     }
   }
 
